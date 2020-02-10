@@ -6,7 +6,7 @@ import torchvision.models as models
 import numpy as np
 import matplotlib.pyplot as plt
 # instantiate model (supports PyTorch, Keras, TensorFlow (Graph and Eager), JAX, MXNet and many more)
-model = models.alexnet(pretrained=True).eval()
+model = models.resnet18(pretrained=True).eval()
 preprocessing = dict(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], axis=-3)
 fmodel = foolbox.models.PyTorchModel(model, bounds=(0, 1), num_classes=1000, preprocessing=preprocessing)
 
