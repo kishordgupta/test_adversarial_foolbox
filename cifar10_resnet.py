@@ -73,3 +73,38 @@ adversarial = np.array(adversarials)
 for i in range(adversarial.shape[0]):
   plt.imsave('./MBIM/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
 
+attack = foolbox.attacks.IterativeGradientSignAttack(fmodel)
+adversarials = attack(images, labels)
+print(np.mean(fmodel.forward(adversarials).argmax(axis=-1) == labels))
+adversarial = np.array(adversarials)
+for i in range(adversarial.shape[0]):
+  plt.imsave('./IGSA/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
+
+  
+attack = foolbox.attacks.IterativeGradientAttack(fmodel)
+adversarials = attack(images, labels)
+print(np.mean(fmodel.forward(adversarials).argmax(axis=-1) == labels))
+adversarial = np.array(adversarials)
+for i in range(adversarial.shape[0]):
+  plt.imsave('./IGA/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
+
+attack = foolbox.attacks.SparseL1BasicIterativeAttack(fmodel)
+adversarials = attack(images, labels)
+print(np.mean(fmodel.forward(adversarials).argmax(axis=-1) == labels))
+adversarial = np.array(adversarials)
+for i in range(adversarial.shape[0]):
+  plt.imsave('./SBIM/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
+  
+attack = foolbox.attacks.EADAttack(fmodel)
+adversarials = attack(images, labels)
+print(np.mean(fmodel.forward(adversarials).argmax(axis=-1) == labels))
+adversarial = np.array(adversarials)
+for i in range(adversarial.shape[0]):
+  plt.imsave('./EAD/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
+
+attack = foolbox.attacks.DecoupledDirectionNormL2Attack(fmodel)
+adversarials = attack(images, labels)
+print(np.mean(fmodel.forward(adversarials).argmax(axis=-1) == labels))
+adversarial = np.array(adversarials)
+for i in range(adversarial.shape[0]):
+  plt.imsave('./DDA/'+str(i)+'.png',adversarial[i].transpose((1,2,0)))
